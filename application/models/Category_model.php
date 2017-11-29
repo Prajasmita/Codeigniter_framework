@@ -9,26 +9,16 @@ class Category_model extends CI_Model
 
     }
 
+    // Function To Ass Category
     public function addCategory($name)
     {
         $data=array('name'=>$name);
 
         $this->db->insert('category', $data);
 
-        //$this->db->query("INSERT INTO category(name) VALUES ('$name')");
     }
 
-    /*public function getAllCategory()
-    {
-        //echo "hiii";
-        $query = $this->db->get('category');
-        //select * from category
-//        $this->db->last_query();
-
-        return $query;
-        //$this->db->last_query();
-    }*/
-
+    // Function To Fetch Current Page Category Record
     public function get_current_page_records($limit, $start)
     {
         $this->db->limit($limit, $start);
@@ -47,6 +37,7 @@ class Category_model extends CI_Model
         return false;
     }
 
+    // Function To Get Total Category Record
     public function get_total()
     {
         return $this->db->count_all("category");
@@ -63,6 +54,7 @@ class Category_model extends CI_Model
 
     }
 
+    // Update Query For Selected Category
     public function updateCategory($id,$data){
         $data=array('name'=>$data);
         $this->db->set($data);
@@ -80,36 +72,20 @@ class Category_model extends CI_Model
         return $query->row_array();
 
     }
-
+    // Function To Delete Selected Category
     public function deleteCategory($id){
 
         $this->db->where('id', $id);
         $this->db->delete('category');
     }
 
+    // Function To Delete Selected Category/s From Database
+    public function deleteCheckedCategory($id)
+    {
 
-
-
-
-// Function To Fetch Selected Student Record
-    /*function show_category_id($data){
-        $this->db->select('*');
-        $this->db->from('category');
-        $this->db->where('id', $data);
-        $query = $this->db->get();
-        $result = $query->result();
-        return $result;
-    }
-// Update Query For Selected Category
-    function update_category_id1($id,$data){
         $this->db->where('id', $id);
-        $this->db->update('category', $data);
-    }*/
-
-
-
-
-
+        return $this->db->delete('category');
+    }
 
 }
 

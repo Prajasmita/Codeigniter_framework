@@ -24,7 +24,7 @@
                 <ul>
                     <li class="fileds">
                         <div class="name_fileds">
-                            <label>Category Name</label>
+                            <label>Category Name<span class="error">*</span></label>
                             <input name="category_name" value="<?php echo set_value('category_name'); ?>"type="text" />
                             <span class="error"><?php echo form_error('category_name'); ?></span>
                         </div>

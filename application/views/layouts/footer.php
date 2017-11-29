@@ -175,22 +175,157 @@
         });
     });
 </script>
+<script type="text/javascript">
+
+        function deleteConfirm(){
+            var result = confirm("Are you sure to delete?");
+            if(result){
+//            return true;
+                $("#form_delete").submit();
+            }else{
+                return false;
+            }
+        }
+</script>
 <script>
-    function doconfirm()
-    {
-       job=confirm("Are you sure to delete ?");
-        if(job=true)
-        {
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+    $(document).ready(function(){
+
+        $('#delete_product').click(function(e){
+            e.preventDefault();
+
+            var conf = confirm("Are you sure you want to delete this?");
+            if(conf)
+            {
+                var id = [];
+
+                $(':checkbox:checked').each(function(i){
+                    id[i] = $(this).val();
+                    //alert(id[i]);
+                });
+
+                if(id.length === 0) //tell you if the array is empty
+                {
+                    alert("Please Select atleast one checkbox");
+                }
+                else {
+
+                    // var tr = $(this).closest('tr');
+                    $.ajax({
+                        url: '<?php echo base_url(); ?>product/bulkDelete',
+                        type: "POST",
+                        data: {id:JSON.stringify(id)},
+                        success: function (data) {
+
+                            if(data){
+
+                                // alert(id.length);
+                                for(var i=0; i<id.length; i++)
+                                {
+                                    //alert("hiiiii");
+                                    // alert(id[i]);
+
+                                    $('tr#'+id[i]+'').fadeOut('slow',function(){
+
+                                        $(this).remove();
+
+                                    });
+
+                                }
+                            }else{
+                                alert("can't delete the row")
+                            }
+
+                        }
+
+                    });
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
+        });
+    });
+</script>
+<script>
+        $(document).ready( function() {
+
+            $('#bulk_select').on('click', function(e) {
+                if($(this).is(':checked',true)) {
+                    $(".checkbox").prop('checked', true);
+                }
+                else {
+                    $(".checkbox").prop('checked',false);
+                }
+            });
+        });
 </script>
 
+<script>
+    $(document).ready(function(){
+
+        $('#delete_category').click(function(e){
+
+            e.preventDefault();
 
 
+            var conf = confirm("Are you sure you want to delete this?");
+            if(conf)
+            {
+                var id = [];
+
+                $(':checkbox:checked').each(function(i){
+                    id[i] = $(this).val();
+                    //alert(id[i]);
+                });
+
+                if(id.length === 0) //tell you if the array is empty
+                {
+                    alert("Please Select atleast one checkbox");
+                }
+                else {
+
+                    // var tr = $(this).closest('tr');
+                    $.ajax({
+                        url: '<?php echo base_url(); ?>category/bulkDelete',
+                        type: "POST",
+                        data: {id:JSON.stringify(id)},
+                        success: function (data) {
+
+                            if(data){
+                                //alert(id.length);
+                                for(var i=0; i<id.length; i++)
+                                {
+                                    //alert("hiiiii");
+                                    //alert(id[i]);
+
+                                    $('tr#'+id[i]+'').fadeOut('slow',function(){
+
+                                        $(this).remove();
+
+                                    });
+
+                                }
+                            }else{
+                                alert("can't delete the row")
+                            }
+
+                        }
+
+                    });
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
+        });
+    });
+</script>
 
 
 </body>

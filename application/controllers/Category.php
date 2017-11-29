@@ -14,6 +14,7 @@ class Category extends CI_Controller
 
     }
 
+    // Default Function
     public function index()
     {
 
@@ -71,16 +72,7 @@ class Category extends CI_Controller
         $this->load->view('index', $data);
     }
 
-    // mycode before pagination
-    /* $page_name = 'category/list';
-
-   $data = ['page_name' => $page_name,];
-   $data['Fetch_data'] = $this->Category_model->getAllCategory();
-   $this->load->view('category/list.php', $data);
-   $this->load->view('index', $data);
-   }*/
-
-
+    // Function To Add Data In Database
     public function add()
     {
 
@@ -101,7 +93,8 @@ class Category extends CI_Controller
 
     }
 
-     public function edit(){
+    // Function To Edit Data In Database
+    public function edit(){
          $page_name = 'category/edit';
          $data = ['page_name' => $page_name];
 
@@ -122,6 +115,7 @@ class Category extends CI_Controller
              $this->load->view('index', $data);
      }
 
+    // Function To Delete Data From Database
     public function delete(){
 
          $page_name = 'category/delete';
@@ -139,8 +133,36 @@ class Category extends CI_Controller
           $this->load->view('index', $data);
 
       }
-
     }
+
+    //Function To Delete Multiple Data
+    public function bulkDelete()
+    {
+//        print_r($this->input->post('id'));
+//        print_r(json_decode($this->input->post('id')));
+        $ids = json_decode($this->input->post('id'));
+
+
+        if ($ids) {
+            foreach ($ids as $i) {
+                //print_r($i);exit;
+                $this->Category_model->deleteCheckedCategory($i);
+            }
+            echo true;
+            exit;
+        }
+        else
+        {
+            echo false;
+            exit;
+        }
+    }
+
+
+
+
+
+
 }
 
 

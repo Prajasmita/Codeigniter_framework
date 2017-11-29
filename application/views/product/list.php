@@ -10,8 +10,9 @@
                      <input type="submit" class="submit" value="submit">
                  </div>
                     </li>-->
+                    <li><a href="<?php echo base_url() ?>">Category List</a></li>
                     <li><a href="<?php echo base_url('product/add') ?>" > Add Product</a></li>
-                    <li><a href="#">Delete</a></li>
+                    <li><a href="" class="btn btn_edit"  id="delete_product" name="delete" >Delete</a></li>
                 </ul>
             </div>
             <div class="table_container_block">
@@ -21,7 +22,7 @@
                     <tr>
 
                         <th width="10%">
-                            <input type="checkbox" class="checkbox" id="checkbox_sample18" /> <label class="css-label mandatory_checkbox_fildes" for="checkbox_sample18"></label>
+                            <input type="checkbox" class="checkbox" id="bulk_select" /> <label class="css-label mandatory_checkbox_fildes" for="bulk_select"></label>
                         </th>
                         <th style="">Product Name <!--<a href="#" class="sort_icon"><img src="images/sort.png"></a>--></th>
                         <th style="">Product Image</th>
@@ -34,22 +35,28 @@
                     <tbody>
                     <?php foreach ($results as $data) { ?>
 
-                    <tr>
+                    <tr id="<?php echo $data->id ?>" >
                         <td>
-                            <input type="checkbox" class="checkbox" id="checkbox_sample19" /> <label class="css-label mandatory_checkbox_fildes" for="checkbox_sample19"></label>
+                            <input type="checkbox" class="checkbox" value="<?php echo $data->id ?>" name="checkbox[]" id="checkbox_sample<?php echo $data->id ?>" />
+                            <label class="css-label mandatory_checkbox_fildes" for="checkbox_sample<?php echo $data->id ?>"></label>
                         </td>
-                        <td><?php echo $data->name ?></td>
+                        <td><?php echo ''.ucwords($data->name).'' ?></td>
 
-                        <td><img src="<?php echo base_url()."public/photo/".$data->image ?>"></td>
+                      <td><img class="image" src="<?php echo base_url()."public/photo/".$data->image ?>"></td>
+
+
                         <td><?php echo $data->price ?></td>
-                        <td><?php echo $data->name ?></td>
+
+
+                        <td><?php echo ''.ucwords($data->c_name).'' ?></td>
 
 
 
                         <td>
                             <div class="buttons">
-                                <button class="btn btn_edit">Edit</button>
-                                <button class="btn btn_delete">Delete</button>
+                                <a href="<?php echo base_url("product/edit/".$data->id);?>" class="btn btn_delete" >Edit</a>
+                                <?php /*echo anchor('category/edit?id='.$row->id,'Edit')*/?>
+                                <a href="<?php echo base_url("product/delete/".$data->id);?>" class="btn btn_edit" onclick="return deleteConfirm()">Delete</a>
                             </div>
                         </td>
                     </tr>
@@ -70,3 +77,7 @@
     </div>
 </div>
 <!-- Content Section End-->
+
+
+
+   

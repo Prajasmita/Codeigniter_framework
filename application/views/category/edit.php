@@ -8,9 +8,8 @@
 <div class="section content_section">
     <div class="container">
         <div class="filable_form_container">
-            <!-- <h1>hiiiiii</h1>-->
             <?php extract($result) ?>
-            <form action="#" method="post">
+            <form action="" method="post">
 
                 <div class="form_container_block">
                     <?php if ($this->session->flashdata('success')) {
@@ -25,16 +24,14 @@
                         <li class="fileds">
                             <div class="name_fileds">
                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                <label>Category Name</label>
-                                <input name="category_name" value="<?php echo $name ?>" type="text" />
+                                <label>Category Name<span class="error">*</span></label>
+                                <input name="category_name" value="<?php echo ''.ucwords($name).'' ?>" type="text" />
                                 <span class="error"><?php echo form_error('category_name'); ?></span>
                             </div>
                         </li>
                     </ul>
                     <div class="next_btn_block">
-                        <div class="nextbtn">
-
-
+                        <div >
                             <input class="submit_buttons" type="submit" name="submit" value="submit">
                             <!--<span><img src="images/small_triangle.png"  alt="small_triangle"> </span></input>-->
                             <a href="<?php echo base_url();?>" class="cancle">Cancle</a>
